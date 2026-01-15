@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://localhost:* ws://localhost:*;">
+    <title>edit</title>
+</head>
+<body>
+    <h2>edit your chat:<%= chat._id %></h2>
+    <p>this chat was send from <b><%= chat.from %> </b> <b>to <%= chat.to %></b></p>
+    <form action="/chats/<%=chat._id %>?_method=put" method="post">
+            <textarea name="msg" id="" rows="10" cols="50"><%= chat.msg %></textarea><br>
+            <button>edit</button>
+    </form>
+</body>
+</html>

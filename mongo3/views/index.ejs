@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whatsapp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>All chats</h1>
+        <form action="/chats/new" method="get">
+            <button>new chat</button>
+        </form>
+        <br>
+
+     <% for(let chat of chats){%>
+        <div class="chat">
+            <p>from:<%=chat.from%></p>
+            <div class="msg">
+                <p><%=chat.msg%></p>
+                <form action="/chats/<%= chat.id %>/edit" method="get">
+                    <button>edit</button>
+                </form>
+                <br>
+                 <form action="/chats/<%= chat.id %>?_method=delete" method="post">
+                    <button>delete</button>
+                </form>
+            </div>
+            <p>received by:<%=chat.to%></p>
+            <hr/>
+            <p><%=chat.created_at.toString().split(" ")[4] %></p>
+            <p><%=chat.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+        </div>
+        <!-- we use split which turn the string to array based on space as given in the split  -->
+         <!-- we use slice to make the new array and join them into a new string with space as given in split -->
+        <br> <br>
+    <% } %>
+    
+</body>
+</html>

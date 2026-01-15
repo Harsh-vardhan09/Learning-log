@@ -1,0 +1,15 @@
+h1{
+    color:maroon;
+}
+.user{
+
+ font-style: italic;   
+}
+.post   {
+    background-color:blanchedalmond ;
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+}
+.content{
+    color: blueviolet;
+}
