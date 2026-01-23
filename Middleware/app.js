@@ -1,5 +1,6 @@
 const express=require("express");
 const app=express();
+const ExpressError=require("./ExpressError");
 
 
 // //middleware = send response so the get res never sends the res
@@ -27,7 +28,12 @@ const checkToken=("/api",(req,res,next)=>{
     if(token==="giveaccess"){
         next();
     }
-    throw new Error("acess denied")
+    throw new ExpressError(401,"ACCESS DENIED")
+});
+
+app.listen(8080,()=>{
+    console.log("server is working");
+    
 });
 
 app.get("/api",checkToken,(req,res)=>{
@@ -46,16 +52,27 @@ app.get("/random",(req,res)=>{
     res.send("working path random")
 });
 
-app.listen(8080,()=>{
-    console.log("server is working");
-    
+app.get("/err",(req,res)=>{
+    abcd=abcd;
 });
 
+app.get("/admin",(req,res)=>{
+    throw new ExpressError(403,"ACCESS TO ADMIN IS FORBIDDEN")
+})
 
-
-
-app.use((req,res)=>{
-    res.send("404 page not found")
+app.use((err,req,res,next)=>{
+    let {status=500,message="some error"}=err;
+    res.status(status).send(message);
 });
+
+// app.use((err,req,res,next)=>{
+//     console.log("----error2-----");
+//     next(err);
+// });
+
+
+// app.use((req,res)=>{
+//     res.send("404 page not found")
+// });
 
 //we create a default path at end of page that if not other is matched in it it gets called for 404 not found
