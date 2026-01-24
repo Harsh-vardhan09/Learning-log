@@ -52,9 +52,11 @@ const addData=async()=>{
 
 // addData();
 
+//Functions
 const getData=async()=>{
     let res=await Post.findOne({}).populate('user');
     console.log(res);
     
 }
 getData();
+

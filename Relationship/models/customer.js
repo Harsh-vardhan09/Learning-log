@@ -22,6 +22,23 @@ const customerSchema=new Schema({
     }]
 });
 
+//we are calling findByIdAndDelete and this call findOneAndDelete as middleware.
+//thats why these middleware are working for these
+
+//this works before the execution of the function
+// customerSchema.pre("findOneAndDelete",async()=>{
+//   console.log("pre middleware")
+// });
+
+//this works after the execution of the function 
+customerSchema.post("findOneAndDelete",async(customer)=>{
+  if(customer.orders.length){
+    let res=await Order.deleteMany({_id:{$in:customer.orders} });
+    console.log(res);
+    
+  }
+});
+
 /*
 if we want to only add the object id as ref we type Schema.Types.ObjectId
 this adds only the id ref since populate uses to save storage 
@@ -49,12 +66,6 @@ const Customer = mongoose.model("Customer", customerSchema);
 
 // addCustomer();
 
-const findCustomer=async()=>{
-    let res=await Customer.find({}).populate("orders");
-    console.log(res);
-}
-
-findCustomer();
 
 // const addOrders = async () => {
 //  let res= await Order.insertMany([
@@ -67,4 +78,37 @@ findCustomer();
 
 // addOrders();
 
+
+//Functions
+const findCustomer=async()=>{
+    let res=await Customer.find({}).populate("orders");
+    console.log(res);
+}
+
+// findCustomer();
+
+const addCust=async()=>{
+  let newCust=new Customer({
+    name:"aryan arjun",   
+  });
+
+  let newOrder=new Order({
+    item:"burger",
+    price:150
+  });
+  newCust.orders.push(newOrder);
+  await newCust.save();
+  await newOrder.save();
+  console.log("added new customer");
+}
+
+// addCust();
+
+const delCust=async()=>{
+  let data=await Customer.findByIdAndDelete('6973a48593466c6cafacfa74');
+  console.log(data);
+  
+}
+
+delCust();
 
