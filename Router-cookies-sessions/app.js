@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const flash=require("connect-flash");
+const Path=require("path");
+
+
+app.set("view engine","ejs");
+app.set("views",Path.join(__dirname,"views"));
+
 
 app.use(
   session({
@@ -9,6 +16,12 @@ app.use(
     saveUninitialized: true,
   }),
 );
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.message=req.flash("success")
+  res.locals.error=req.flash("error")
+  next();
+})
 
 
 // app.get("/reqcount", (req, res) => {
@@ -29,13 +42,24 @@ app.get("/register",(req,res)=>{
     let {name="anonymous"}=req.query;
     req.session.name=name;
     console.log(req.session.name);
+    if(name=="anonymous"){
+      req.flash("error","user not registered")
+    }else{
+      req.flash("success","user registered");
+    }
     res.redirect("/hello");
 });
 
+
 app.get("/hello",(req,res)=>{
-    res.send(`hello ${req.session.name}`);
+  
+  res.render("page.ejs",{name:req.session.name});
 })
+
+
+
 
 app.listen("3000", () => {
   console.log("server is running at 3000");
 });
+
