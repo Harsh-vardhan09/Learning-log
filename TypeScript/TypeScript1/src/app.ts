@@ -149,3 +149,124 @@ class Employees extends Users{
 }
 
 // 1 hr 9 min 
+//In interface there is equal to sign and in type there is not 
+
+type user={
+    name:string,
+    age:number,
+}
+
+function isLegals(user:user){
+    return user.age>18;
+}
+
+
+//intersection
+
+type Employee={
+    name:string,
+    startDate:Date,
+}
+
+type Managers={
+    name:string,
+    department:string
+}
+
+type TeamLead= Employee & Managers;
+
+const E:Employee={
+    name:"aarsh",
+    startDate:new Date(),
+}
+
+const M:Managers={
+    name:"aarsh",
+    department:"It"
+}
+
+
+const teamLead:TeamLead={
+    name:"aarsh",
+    startDate:new Date(),
+    department:"It"
+}
+
+
+//unions
+
+type GoodUser={
+    name:string,
+    gift:string
+}
+
+type BadUser={
+    name:string,
+    ip:string
+}
+
+type NewUser=GoodUser | BadUser;
+
+const newUser:NewUser={
+    name:"aarsh",
+    ip:"asdas",
+    gift:"adasad"
+}
+
+/// interfaces vs types
+//create two types called user and admin 
+// Create a function that takes either a user or an admin
+//as an input, and return a string saying "welcome [name]"
+
+
+interface Admin{
+    name:string,
+    permission:string
+}
+
+interface User{
+    name:string,
+    age:number
+}
+
+type UserOrAdmin=User|Admin;
+
+function greet(user:UserOrAdmin){
+    console.log("welcome"+user.name);
+}
+
+
+//given array 
+
+function getMax(nums: number[]){
+    let maxValue= -1000000000;
+    for(let i of nums){
+        if(nums[i]>maxValue){
+            maxValue=nums[i];
+        }
+    }
+    return maxValue;
+}
+
+getMax([1,2,3,4,5,6,7,8]);
+
+interface Addresses{
+    city:string,
+    pincode:string
+}
+
+interface Users4{
+    name:string,
+    age:number,
+    addresses:Address[]
+}
+
+
+function filterUsers(users:Users4[]){
+    let ans=[];
+    for(let i=0;i<users.length;i++){
+        if(users[i].age>18){
+            ans.push(users[i]);
+        }
+    }
+}
