@@ -52,5 +52,9 @@ Thumbs.db
 # Misc
 *.tgz
 
+
 #readme files 
-*.md
+**/README.md
+
+# Except the main readme
+!/README.md
