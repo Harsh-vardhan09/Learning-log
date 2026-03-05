@@ -1,5 +1,5 @@
 
-### Maps:-
+## Maps:-
 
 we know we can take an function as argument for an function
 what if we had global function that took arr 1 and
@@ -29,7 +29,8 @@ map() — transforms every element
 - The output array has the same length as the input array.
 - Each element becomes whatever the function returns.
 
-### Filter
+---
+## Filter
 
 It is similar to map but here 
 
@@ -59,8 +60,10 @@ console.log(out);
 | Callback return | Any value          | Boolean (`true/false`)    |
 | Result          | New mapped values  | Subset of original values |
 
-
+---
 ## Middleware readme
+
+- we create a default path at end of page that if not other is matched in it it gets called for 404 not found
 
 ```js
 app.use((req,res)=>{
@@ -68,4 +71,3 @@ app.use((req,res)=>{
 });
 ```
 
-- we create a default path at end of page that if not other is matched in it it gets called for 404 not found
