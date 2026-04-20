@@ -20,7 +20,7 @@ const App = () => {
     ws.onmessage=(e)=>{
       alert(e.data)
     }
-
+     
   },[]) 
   return (
     <div>
