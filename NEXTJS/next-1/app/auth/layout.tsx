@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 
-const authLayout = ({children}) => {
+const authLayout = ({children}:React.ReactElement) => {
   return (
     <div>
         <Navbar/>
